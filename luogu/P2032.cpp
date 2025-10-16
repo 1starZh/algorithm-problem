@@ -2,7 +2,7 @@
 using namespace std;
 int n, k;
 int a[2000005];
-queue<int> q;
+deque<int> q;
 
 int main() {
     ios::sync_with_stdio(0);
@@ -11,10 +11,17 @@ int main() {
     for (int i = 1; i <= n; i++) {
         cin >> a[i];
     }
-    for (int i = 1; i <= n-k+1; i++) {
-        cout << *max_element(a+i, a+i+k) << endl;
+    for (int i = 1; i <= n; i++) {
+        while(!q.empty() && q.front() + k <= i) {
+            q.pop_front();
+        }
+        while (!q.empty() && a[q.back()] < a[i]) {
+            q.pop_back();
+        }
+        q.push_back(i);
+        if (i >= k) {
+            cout << a[q.front()] << endl;
+        }
     }
     return 0;
 }
-
-// 待优化（使用队列）
