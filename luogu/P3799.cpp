@@ -13,6 +13,6 @@ int main() {
     }
     sort(a, a+n);
     
-
+    
     return 0;
 }
